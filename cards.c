@@ -32,9 +32,9 @@ int main()
             continue;
         default:
             val = atoi(card_name);
-            if (val < 1 && 10 < val)
+            if (val < 1 || 10 < val)
             {
-                puts("Enter valid number!");
+                puts("Enter valid input!");
                 continue;
             }
         }
@@ -43,8 +43,8 @@ int main()
             count++;
         else if (val == 10)
             count--;
+        printf("Current count: %i\n", count);
     }
 
-    printf("Current count: %i\n", count);
     return 0;
 }
