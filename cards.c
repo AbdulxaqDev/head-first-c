@@ -8,40 +8,43 @@
 int main()
 {
     char card_name[3];
-
-    puts("Enter the card_name: ");
-    scanf("%2s", card_name);
-
-    int val = 0;
-
-    // with switch statement
-    switch (card_name[0])
+    int count = 0;
+    while (card_name[0] != 'x' &&
+           card_name[0] != 'X')
     {
-    case 'K':
-    case 'J':
-    case 'Q':
-        val = 10;
-        break;
-    case 'A':
-        val = 11;
-        break;
-    default:
-        val = atoi(card_name);
+        puts("Enter the card_name: ");
+        scanf("%2s", card_name);
+
+        int val = 0;
+
+        switch (card_name[0])
+        {
+        case 'K':
+        case 'J':
+        case 'Q':
+            val = 10;
+            break;
+        case 'A':
+            val = 11;
+            break;
+        case 'x':
+        case 'X':
+            continue;
+        default:
+            val = atoi(card_name);
+            if (val < 1 && 10 < val)
+            {
+                puts("Enter valid number!");
+                continue;
+            }
+        }
+
+        if (3 <= val && val <= 6)
+            count++;
+        else if (val == 10)
+            count--;
     }
-    // with if statement
-    if (card_name[0] == 'K' ||
-        card_name[0] == 'Q' ||
-        card_name[0] == 'J')
-        val = 10;
-    else if (card_name[0] == 'A')
-        val = 11;
-    else
-        val = atoi(card_name);
 
-    if (3 <= val && val <= 6)
-        puts("Count has gone up");
-    else if (val == 10)
-        puts("Count has gone down");
-
+    printf("Current count: %i\n", count);
     return 0;
 }
