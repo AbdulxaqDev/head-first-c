@@ -1,4 +1,4 @@
-[May 5, 2024]
+[May 2, 2024]
     Array variable is pointer to the first element of array.
     We can refer to an element of an array as following:
 
@@ -35,3 +35,13 @@
     
     If we forget to set limit in scanf and user inputs more data than supposed
     it causes buffer owerflow
+
+    We can use fgets(), so we can not forget to set the size of input
+    because fgets() signiture requires to set maximum input size then it works
+
+        char food[5];
+        printf("Enter favorite food: ");
+        fgets(food, sizeof(food), stdin);
+        printf("%s\n", food);
+
+    String litiral never can not be updated.
