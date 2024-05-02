@@ -1,0 +1,14 @@
+[May 5, 2024]
+    Array variable is pointer to the first element of array.
+    We can refer to an element of an array as following:
+
+        printf("address of array: %p\n", message);
+        printf("3st element of array: %c\n", message[2]);
+        printf("3st element of array: %c\n", *(message + 2));
+    
+    We can skip the array elements as following:
+
+        char message[] = "Hello friends?!";
+        puts(message + 6); // prints starting from "f", "friends?!"
+
+        message[3] == *(message + 3) == *(3 + message) == 3[message]
