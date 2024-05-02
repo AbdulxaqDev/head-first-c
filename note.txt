@@ -12,3 +12,26 @@
         puts(message + 6); // prints starting from "f", "friends?!"
 
         message[3] == *(message + 3) == *(3 + message) == 3[message]
+    
+    We can get user input with scanf:
+
+        char name[40];
+        printf("Enter your name: ");
+        scanf("%39s", name); // gets up to 39 character and \0
+    
+    We can get numeric values:
+
+        int age;
+        printf("Enter your age: ");
+        scanf("%i", &age);
+
+    We can get multiple inputs at once:
+
+        char first_name[20];
+        char last_name[20];
+        printf("Enter your first and last name: ");
+        scanf("%19s %19s", first_name, last_name);
+        printf("First: %s, Last: %s\n", first_name, last_name);
+    
+    If we forget to set limit in scanf and user inputs more data than supposed
+    it causes buffer owerflow
