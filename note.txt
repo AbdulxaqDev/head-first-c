@@ -44,4 +44,4 @@
         fgets(food, sizeof(food), stdin);
         printf("%s\n", food);
 
-    String litiral never can not be updated.
+    String litiral never can be updated. String literals are stored in read-only memory.
