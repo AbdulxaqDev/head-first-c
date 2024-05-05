@@ -17,13 +17,13 @@ int main()
 
         if (latitude < -90.0 || 90.0 < latitude)
         {
-            printf("Invalid latitude:  %f\n", latitude);
+            fprintf(stderr, "Invalid latitude:  %f\n", latitude);
             return 2;
         }
 
         if (longitude < -180 || 180 < longitude)
         {
-            printf("Invalid longitude:  %f\n", longitude);
+            fprintf(stderr, "Invalid longitude:  %f\n", longitude);
             return 2;
         }
         printf("{\"latitude\": %f, \"longitude\": %f, \"info\": \"%s\"}", latitude, longitude, info);

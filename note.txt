@@ -64,3 +64,20 @@
 
     Here we are redirecting the gpsdata to standart input of geo2json and redirecting
     the standard output of geo2json to output.json
+
+    But, there is one problem. The problem is when the geo2json encounters an error while processing
+    passed data, it writes the error message also to output json file. And nothing will be noticable
+    in terminal. To prevent this and output the error to terminal, we can use fprintf().
+
+    fprintf() is general version of printf():
+
+    printf("Hello there!");
+    fprintf(stdout, "Hello there!");
+
+    above the code outputs the same output. We can specify the outpout type with fprintf(outType, "Output");
+
+    While redirecting all standard outputs of geo2json to a json file, we can output the error to standard error
+    stream. So, the standars error stream aways outputted to rerminal.
+
+    printf("Error!"); // redirected to file
+    fprintf(stderr, "Error"); // redirected to display/terminal
