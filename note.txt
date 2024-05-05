@@ -45,3 +45,13 @@
         printf("%s\n", food);
 
     String litiral never can be updated. String literals are stored in read-only memory.
+
+[May 5, 2024]
+    The C language orovides some ready libraries to save our time. One of them is
+    string.h library. It specialised to work with strings. It contains functions, which 
+    can help up to work with strings. It containes following functions:
+
+    - strchr() - finds a char in string
+    - strstr() - finds substring
+    - strlen() - returns length of string
+    
