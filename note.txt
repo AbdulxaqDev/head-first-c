@@ -54,4 +54,13 @@
     - strchr() - finds a char in string
     - strstr() - finds substring
     - strlen() - returns length of string
-    
+
+    We can redirect standart input and output with ">" and "<" respectively.
+
+    ./geo2json < gpsdata.csv > output.json
+
+    "<" - redirects standart inout
+    ">" - redirects standart output
+
+    Here we are redirecting the gpsdata to standart input of geo2json and redirecting
+    the standard output of geo2json to output.json
