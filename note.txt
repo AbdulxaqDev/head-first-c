@@ -55,12 +55,13 @@
     - strstr() - finds substring
     - strlen() - returns length of string
 
-    We can redirect standart input and output with ">" and "<" respectively.
+    We can redirect standart input and output to a file with ">" and "<" respectively.
 
     ./geo2json < gpsdata.csv > output.json
 
-    "<" - redirects standart inout
-    ">" - redirects standart output
+    "<" - redirects standart inout to a file
+    ">" - redirects standart output to a file
+    "2>" - redirects standart error to a file
 
     Here we are redirecting the gpsdata to standart input of geo2json and redirecting
     the standard output of geo2json to output.json
@@ -81,3 +82,5 @@
 
     printf("Error!"); // redirected to file
     fprintf(stderr, "Error"); // redirected to display/terminal
+
+    We can redirect only the standard error with "2>".
