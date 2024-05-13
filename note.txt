@@ -84,3 +84,29 @@
     fprintf(stderr, "Error"); // redirected to display/terminal
 
     We can redirect only the standard error with "2>".
+
+[May 13, 2024]
+    Outputting multiple files
+    We can creat a stream on fly. Each data stream is represented by a pointer to a file.
+    And, we can create a new data stream with "fopen()" function:
+
+    FILE *in_file = fopen("input.txt", "r");
+
+    This will create a data stream to read FROM file here. fopen() gets two arguments,
+    the first one is file name and second one is the "r" reading mode. Total, there are
+    three modes, "r" is reading, "w" is writing and "a" is appending mode.
+
+    FILE *out_file = fopen("output.txt", "r"); // creates stream in read mode
+
+    here is the stream to write to a file.
+
+    To make it simple, the fopen() function creates streams in different modes (read, write and append).
+    The fscanf() function reads stream:
+
+        int fscanf(FILE *ptr, const char *format, ...);
+
+    The fprintf() function writes stream:
+    
+        int fprintf(FILE *stream, const char *format, ...)
+
+    
