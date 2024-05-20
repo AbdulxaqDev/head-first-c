@@ -73,7 +73,7 @@
     fprintf() is general version of printf():
 
     printf("Hello there!");
-    fprintf(stdout, "Hello there!");
+    fprintf(stdout, "Hello there!"); // here we can change use stderr, stdout.
 
     above the code outputs the same output. We can specify the outpout type with fprintf(outType, "Output");
 
@@ -101,12 +101,18 @@
     here is the stream to write to a file.
 
     To make it simple, the fopen() function creates streams in different modes (read, write and append).
+    fscanf() reads different types of streams, any file also can be read as a stream. Here, the fscanf() function
+    reading a file pointer as a stream.
     The fscanf() function reads stream:
 
         int fscanf(FILE *ptr, const char *format, ...);
 
+    The fprintf() function is the same with fscanf(), but opposite of the fscanf(). It outputs stream in different 
+    wats, here it is outputting a file.
     The fprintf() function writes stream:
     
         int fprintf(FILE *stream, const char *format, ...)
+        
+[May 20, 2024]
 
     

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <getopt.h>
+// #include <getopt.h>
 
 int main(int argc, char *argv[])
 {
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     argv += optind;
 
     if (thick)
-        puts("Thicl crust.");
+        puts("Thick crust.");
 
     if (delivery[0])
         printf("To be delevired %s. \n", delivery);

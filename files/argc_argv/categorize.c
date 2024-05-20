@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     char line[80];
     FILE *in;
 
-    if (!(in = fopen("mied.csv", "r")))
+    if (!(in = fopen("mixed.csv", "r")))
     {
         fprintf(stderr, "Can't open the file.\n");
         return 1;
