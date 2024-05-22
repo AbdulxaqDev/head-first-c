@@ -113,6 +113,16 @@
     
         int fprintf(FILE *stream, const char *format, ...)
         
-[May 20, 2024]
+[May 22, 2024]
 
+    So, the C languhe has different types based on the data type, which reqiueres different memory size.
+
+    They are char, short, int, long, float and double.
+
+    The short can not handle int or long numbers, becuase of its memory allocation is small.
+
+    Almost, all types based on numbers: integer and float. Even characters are registered on computer memory as numbers.
+    computer sees 65 as "A" letter.
+
+    
     
