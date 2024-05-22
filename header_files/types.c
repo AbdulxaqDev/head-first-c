@@ -3,10 +3,11 @@
 int main(int argc, char *argv[])
 {
 
-    short int n = 32767;
-    int t = n;
+    int x = 7;
+    int y = 2;
 
-    printf("%c\n", 126);
+    float z = x/y;
 
+    printf("z = %f\n", z);
     return 0;
 }
