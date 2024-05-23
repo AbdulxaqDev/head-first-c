@@ -124,5 +124,33 @@
     Almost, all types based on numbers: integer and float. Even characters are registered on computer memory as numbers.
     computer sees 65 as "A" letter.
 
+[May 23, 2024]
+    Header files.
+
+    If we want to use one source code in seperate file, we need to create it is header file.
+
+    For example, we have following function in seperate logger.c file:
+
+        void logger(char *message)
+        {
+            printf("%s", message);
+        }
     
-    
+    And we need to create header file called logger.h and we keep the signiture of the function
+    in that header file:
+
+        void logger(char *message);
+
+    and need to include the header file in the c file as following:
+
+        // inside logger.c file
+        #include "logger.h"
+
+    And, to use the logger function in other.c file, we need to include it is header:
+
+        // inside other.c file
+        #include "logger.h"
+
+    The last one, we need to compile files toger which are included with gcc:
+
+        gcc other.c logger.c -o all
