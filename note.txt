@@ -154,3 +154,15 @@
     The last one, we need to compile files toger which are included with gcc:
 
         gcc other.c logger.c -o all
+
+    Object files
+
+    As project gets bigger, files get more and more. And, the time to compile that project gets bigger.
+    To prevent this kind of time consuming, we can compile of all files to object files. Then we can link them
+    together to create executable file.
+
+    The benefit of compiling each file to object, if we upcate one of the source files, we just need to recompole that
+    updated file to object file again instead of all sources files then link them together to generate executable file.
+
+    This prevents us to recompile all unchanged files and saves compilation time. 
+
