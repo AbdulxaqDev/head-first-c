@@ -2,7 +2,8 @@
     "files.associations": {
         "*.ejs": "html",
         "unistd.h": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "launch.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

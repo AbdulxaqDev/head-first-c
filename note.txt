@@ -164,5 +164,25 @@
     The benefit of compiling each file to object, if we upcate one of the source files, we just need to recompole that
     updated file to object file again instead of all sources files then link them together to generate executable file.
 
-    This prevents us to recompile all unchanged files and saves compilation time. 
+    This prevents us to recompile all unchanged files and saves compilation time.
+
+    Make 
+
+    We have a tool called make, it helps us to automate the compilation of only updated files and make executable
+    file.
+
+    Every file that make compiles is called "target".
+
+    Every target need be told two things:
+
+        1. the dependencies
+            which files the target is going to be generated from.
+        2. the recipe
+            the set of instructions it needs to run to generate file.
+    Together, those two form the rule. A rule tells to make all what to do.
+
+
+
+    
+
 
