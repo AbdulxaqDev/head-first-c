@@ -208,3 +208,9 @@
         2. the recipe
             the set of instructions it needs to run to generate file.
     Together, those two form the rule. A rule tells to make all what to do.
+
+[May 25, 2024]
+    Make
+
+    The tool make can track updated files and only recompiles updated files only.
+    That saves compilation time.
