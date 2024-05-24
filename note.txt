@@ -112,7 +112,30 @@
     The fprintf() function writes stream:
     
         int fprintf(FILE *stream, const char *format, ...)
-        
-[May 20, 2024]
 
+[May 20, 2024]
+    We can get command line arguments as main function arguments.
+    The main function gets arguments as array of strings, and length of that array.
+
+    int main(int argc, char *argv[]){} // argc is a number of elemets and argv is array of strings that cli arguments.
+
+    So, c provides a special function that handles cli command in a confortable way.
+    It is getopt(argc, argv, "d:t"), this function returns a character.
+    So we can iterate it with file:
+
+            char ch;
+
+            while ((ch = getopt(argc, argv, "d:t")) != EOF)
+                switch (ch)
+                {
+                case 'd':
+                    delivery = optarg;
+                    break;
+                case 't':
+                    thick = 1;
+                    break;
+                defautl:
+                    fprintf(stderr, "Unknown option: '%s'\n", optarg);
+                    return 1;
+                }
     
