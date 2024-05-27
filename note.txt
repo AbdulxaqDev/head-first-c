@@ -214,3 +214,66 @@
 
     The tool make can track updated files and only recompiles updated files only.
     That saves compilation time.
+[May 27, 2024]
+    Struckts, Unions and Bitfields
+
+    Struct can hold different types of data.
+    we can create a struct as following:
+
+    struct fish {
+        const char *name;
+        const char *species;
+        int teeth;
+        int age;
+    };
+
+    The name and species properties that only hold the pointer to strings.
+    When we assign to another vriable, we just telling to computer to copy that data.
+
+    Struct can have another struct as a property, it is called nesting. Following:
+
+        struct exercise
+        {
+            const char *description;
+            float duration;
+        };
+
+        struct meal
+        {
+            const char *ingredients;
+            float weight;
+        };
+
+        struct preferences
+        {
+            struct meal food;
+            struct exercise exercise;
+        };
+
+        struct fish
+        {
+            const char *name;
+            const char *species;
+            struct preferences care;
+        };
+
+    As you can see, we need to use the "struct" keyword always when we use it, even inside of another struct.
+    To get rid of being wordy like that, we can use "typedef" keyword to create alias to a struct in c, as following:
+    (struct with alias, without name is also called anonymous struct)
+
+        typedef struct cell_phone {
+            int cell_no;
+            const char *wallpaper;
+            float minutes_of_charge;
+            } phone;
+        or
+        typedef struct { // without struct name, only type name
+            int cell_no;
+            const char *wallpaper;
+            float minutes_of_charge;
+            } phone;
+
+
+    then we can use this "phone" type without "struct" word as following:
+
+        phone p = {5557879, "sinatra.png", 1.35};
