@@ -266,7 +266,9 @@
             const char *wallpaper;
             float minutes_of_charge;
             } phone;
+
         or
+        
         typedef struct { // without struct name, only type name
             int cell_no;
             const char *wallpaper;
