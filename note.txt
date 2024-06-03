@@ -279,3 +279,19 @@
     then we can use this "phone" type without "struct" word as following:
 
         phone p = {5557879, "sinatra.png", 1.35};
+[July 3, 2024]
+    Unions
+    Unions can hold different type of data types. But, one data type, it can hold.
+    To creat a union, we use union keyword
+
+        typedef union {
+            short count;
+            float weight;
+            float volume;
+        } quantity;
+
+        quantity q = {.count = 5};
+        q.weight = 5.5;
+    
+    On memory, union takes memory for one type, which gets biggest place;
+    Because, it targets the biggest type size to allocate memory in memory.

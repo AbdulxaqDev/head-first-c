@@ -3,7 +3,8 @@
         "*.ejs": "html",
         "unistd.h": "c",
         "system_error": "c",
-        "launch.h": "c"
+        "launch.h": "c",
+        "typeinfo": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
