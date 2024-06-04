@@ -35,6 +35,31 @@ void display(fruit_order order)
         printf("%i %s\n", order.amount.count, order.name);
 }
 
+typedef union
+{
+    short count;
+    float weight;
+    float litre;
+} measure;
+
+typedef struct
+{
+    const char *name;
+    measure amount;
+    unit_of_measure T;
+} fruit;
+
+void display_fruit(fruit f)
+{
+    printf("There is order ");
+    if (f.T == COUNT)
+        printf("%i %s.\n", f.amount.count, f.name);
+    if (f.T == POUNDS)
+        printf("%2.2f kg(s) of %s.\n", f.amount.weight, f.name);
+    if (f.T == PINTS)
+        printf("%2.2f litre(s) of %s.\n", f.amount.litre, f.name);
+}
+
 int main()
 {
 
@@ -45,6 +70,18 @@ int main()
     display(apples);
     display(strawberries);
     display(oj);
+
+    puts("");
+    puts("");
+    puts("");
+
+    fruit apple = {.name = "Apple", .amount.count = 100, COUNT};
+    fruit strawberry = {.name = "Strawberry", .amount.weight = 3.7, POUNDS};
+    fruit juce = {.name = "Orange juce", .amount.litre = 7.5, PINTS};
+
+    display_fruit(apple);
+    display_fruit(strawberry);
+    display_fruit(juce);
 
     return 0;
 }
