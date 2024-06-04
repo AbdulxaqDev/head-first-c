@@ -297,7 +297,7 @@
     Because, it targets the biggest type size to allocate memory.
 [June 4, 2024]
     Enum
-    Enum is similar is to struct, but it sets number(kind of index) to its each prperty. 
+    Enum is similar is to struct, but it sets number(kind of index) to its each prperty, called symbols. 
     If we use enum, union and struct together:
 
         typedef enum
@@ -323,6 +323,24 @@
 
     based on enum, we can know which type of union is used
 
+    Bitfields
+    Some times we want to store only yes or no value or 1 or 0.
 
+    if we user short:
 
+    short isTrue = 0; // 00000000
+
+    As you can see, even  with short type, if we only want 0 or 1, it uses 2 bytes of
+    memory, waste of memory.
+
+    With bitfields we can use just one bit for that kind of case.
+    To use it, we need to group that kind of variables to struct, then struct stores 0 and 1
+    consequitivly in memory. Bitfields can store a custem number of bits.
+
+    To use bitfields in struct, integer should be unsigned:
+
+        typedef struct {
+            unsigned int first_visit: 1;
+            unsigned int come_again: 1;
+        } survey;
 
