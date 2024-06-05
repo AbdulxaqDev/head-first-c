@@ -343,4 +343,12 @@
             unsigned int first_visit: 1;
             unsigned int come_again: 1;
         } survey;
+    
+[June 5, 2024]
+    Flexible data
+    Linked list, we can implement linked list with struct in C language.
+    One thing, we need to set struct name for a struct to make pointer for it.
+    We can not use only typedef, if we use struct pointer, need to provide struct name
+    with alias name.
 
+    
