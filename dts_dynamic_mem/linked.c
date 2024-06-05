@@ -19,8 +19,10 @@ int main()
     craggy.next = &isla_nublar;
     isla_nublar.next = &shutter;
 
-    
-
+    // inserting
+    island skull = {"Skull", "09:00", "17:00", NULL};
+    isla_nublar.next = &skull;
+    skull.next = &shutter;
 
     return 0;
 }
