@@ -372,3 +372,8 @@
         island skull = {"Skull", "09:00", "17:00", NULL};
         isla_nublar.next = &skull;
         skull.next = &shutter;
+[June 7, 2024]
+    Dynamic memory
+    We can ask for an amount of memory to locate data in C, with malloc() function.
+    to use it, we need to include stdlib.h header. When allocate memory with malloc() function
+    we need to free that allocated memory, with free() function.
