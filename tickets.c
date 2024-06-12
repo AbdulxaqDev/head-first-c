@@ -44,28 +44,40 @@ unsigned queue_duration(size_t length, const unsigned queue[length], size_t idx)
     unsigned first = 0;
     unsigned minutes = 0;
     unsigned *sliced = 0;
+    unsigned *pushed = 0;
+    int isPushed = 0;
     unsigned *copied_queue = copy_array(queue, length);
-    int c = 12;
-    while (c > 0)
+    int c = 13;
+    while (1)
     {
-        first = copied_queue[0];
+        minutes++;
+        first = copied_queue[0] - 1;
         sliced = slice(copied_queue, 1, length);
-        copied_queue = push(sliced, length - 1, first);
-        // puts("---");
-        // printf("first: %u\n", first);
-        // printf("sliced: ");
-        // print_arr(sliced, length - 1);
-        // printf("new: ");
-        // print_arr(copied_queue, length);
-        // c--;
+        if (first == 0 && idx == 0)
+            break;
+        if (first > 0)
+        {
+            pushed = push(sliced, length - 1, first);
+            copied_queue = pushed;
+            isPushed = 1;
+        }
+        else
+        {
+            isPushed = 0;
+            copied_queue = sliced;
+            length--;
+        }
+        if (idx == 0)
+            idx = length;
+        idx--;
     }
+    free(copied_queue);
 
     return minutes;
 }
 
 int main()
 {
-    unsigned arr[] = {2, 5, 3, 4, 6};
 
     // unsigned first = 0;
     // unsigned minutes = 0;
@@ -81,7 +93,21 @@ int main()
     // print_arr(sliced, length - 1);
     // printf("new: ");
     // print_arr(copied_queue, length);
-    printf("\nqueue_duration: %i\n", queue_duration(5, arr, 2));
+
+    /*
+            fixed_test(((unsigned[]){2, 5, 3, 6, 4}), 0,  6);
+            fixed_test(((unsigned[]){2, 5, 3, 6, 4}), 1, 18);
+            fixed_test(((unsigned[]){2, 5, 3, 6, 4}), 2, 12);
+            fixed_test(((unsigned[]){2, 5, 3, 6, 4}), 3, 20);
+            fixed_test(((unsigned[]){2, 5, 3, 6, 4}), 4, 17);
+    */
+
+    unsigned arr[] = {2, 5, 3, 4, 6};
+    unsigned arr1[] = {2, 5, 3, 6, 4};
+    unsigned arr2[] = {2, 5, 3, 6, 4};
+    printf("\nqueue_duration: %i:%i\n", queue_duration(5, arr, 2), 12);
+    printf("\nqueue_duration1: %i:%i\n", queue_duration(5, arr1, 1), 18);
+    printf("\nqueue_duration2: %i:%i\n", queue_duration(5, arr2, 3), 20);
     // printf("queue_duration 2: %i\n", queue_duration(3, arr, 2));
 
     return 0;
