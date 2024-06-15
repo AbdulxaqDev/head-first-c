@@ -2,8 +2,6 @@
 
 int main(int argc, char *argv[])
 {
-
-	puts("Hello there");	
-
+	puts("Hello there");
 	return 1;
 }
