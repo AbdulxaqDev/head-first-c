@@ -1,0 +1,405 @@
+[May 2, 2024]
+    Array variable is pointer to the first element of array.
+    We can refer to an element of an array as following:
+
+        printf("address of array: %p\n", message);
+        printf("3st element of array: %c\n", message[2]);
+        printf("3st element of array: %c\n", *(message + 2));
+    
+    We can skip the array elements as following:
+
+        char message[] = "Hello friends?!";
+        puts(message + 6); // prints starting from "f", "friends?!"
+
+        message[3] == *(message + 3) == *(3 + message) == 3[message]
+    
+    We can get user input with scanf:
+
+        char name[40];
+        printf("Enter your name: ");
+        scanf("%39s", name); // gets up to 39 character and \0
+    
+    We can get numeric values:
+
+        int age;
+        printf("Enter your age: ");
+        scanf("%i", &age);
+
+    We can get multiple inputs at once:
+
+        char first_name[20];
+        char last_name[20];
+        printf("Enter your first and last name: ");
+        scanf("%19s %19s", first_name, last_name);
+        printf("First: %s, Last: %s\n", first_name, last_name);
+    
+    If we forget to set limit in scanf and user inputs more data than supposed
+    it causes buffer owerflow
+
+    We can use fgets(), so we can not forget to set the size of input
+    because fgets() signiture requires to set maximum input size then it works
+
+        char food[5];
+        printf("Enter favorite food: ");
+        fgets(food, sizeof(food), stdin);
+        printf("%s\n", food);
+
+    String litiral never can be updated. String literals are stored in read-only memory.
+
+[May 5, 2024]
+    The C language orovides some ready libraries to save our time. One of them is
+    string.h library. It specialised to work with strings. It contains functions, which 
+    can help up to work with strings. It containes following functions:
+
+    - strchr() - finds a char in string
+    - strstr() - finds substring
+    - strlen() - returns length of string
+
+    We can redirect standart input and output to a file with ">" and "<" respectively.
+
+    ./geo2json < gpsdata.csv > output.json
+
+    "<" - redirects standart inout to a file
+    ">" - redirects standart output to a file
+    "2>" - redirects standart error to a file
+
+    Here we are redirecting the gpsdata to standart input of geo2json and redirecting
+    the standard output of geo2json to output.json
+
+    But, there is one problem. The problem is when the geo2json encounters an error while processing
+    passed data, it writes the error message also to output json file. And nothing will be noticable
+    in terminal. To prevent this and output the error to terminal, we can use fprintf().
+
+    fprintf() is general version of printf():
+
+    printf("Hello there!");
+    fprintf(stdout, "Hello there!"); // here we can change use stderr, stdout.
+
+    above the code outputs the same output. We can specify the outpout type with fprintf(outType, "Output");
+
+    While redirecting all standard outputs of geo2json to a json file, we can output the error to standard error
+    stream. So, the standars error stream aways outputted to rerminal.
+
+    printf("Error!"); // redirected to file
+    fprintf(stderr, "Error"); // redirected to display/terminal
+
+    We can redirect only the standard error with "2>".
+
+[May 13, 2024]
+    Outputting multiple files
+    We can creat a stream on fly. Each data stream is represented by a pointer to a file.
+    And, we can create a new data stream with "fopen()" function:
+
+    FILE *in_file = fopen("input.txt", "r");
+
+    This will create a data stream to read FROM file here. fopen() gets two arguments,
+    the first one is file name and second one is the "r" reading mode. Total, there are
+    three modes, "r" is reading, "w" is writing and "a" is appending mode.
+
+    FILE *out_file = fopen("output.txt", "r"); // creates stream in read mode
+
+    here is the stream to write to a file.
+
+    To make it simple, the fopen() function creates streams in different modes (read, write and append).
+    fscanf() reads different types of streams, any file also can be read as a stream. Here, the fscanf() function
+    reading a file pointer as a stream.
+    The fscanf() function reads stream:
+
+        int fscanf(FILE *ptr, const char *format, ...);
+
+    The fprintf() function is the same with fscanf(), but opposite of the fscanf(). It outputs stream in different 
+    wats, here it is outputting a file.
+    The fprintf() function writes stream:
+    
+        int fprintf(FILE *stream, const char *format, ...)
+
+[May 20, 2024]
+    We can get command line arguments as main function arguments.
+    The main function gets arguments as array of strings, and length of that array.
+
+    int main(int argc, char *argv[]){} // argc is a number of elemets and argv is array of strings that cli arguments.
+
+    So, c provides a special function that handles cli command in a confortable way.
+    It is getopt(argc, argv, "d:t"), this function returns a character.
+    So we can iterate it with file:
+
+            char ch;
+
+            while ((ch = getopt(argc, argv, "d:t")) != EOF)
+                switch (ch)
+                {
+                case 'd':
+                    delivery = optarg;
+                    break;
+                case 't':
+                    thick = 1;
+                    break;
+                defautl:
+                    fprintf(stderr, "Unknown option: '%s'\n", optarg);
+                    return 1;
+                }
+    
+=======
+        
+[May 22, 2024]
+
+    So, the C languhe has different types based on the data type, which reqiueres different memory size.
+
+    They are char, short, int, long, float and double.
+
+    The short can not handle int or long numbers, becuase of its memory allocation is small.
+
+    Almost, all types based on numbers: integer and float. Even characters are registered on computer memory as numbers.
+    computer sees 65 as "A" letter.
+
+[May 23, 2024]
+    Header files.
+
+    If we want to use one source code in seperate file, we need to create it is header file.
+
+    For example, we have following function in seperate logger.c file:
+
+        void logger(char *message)
+        {
+            printf("%s", message);
+        }
+    
+    And we need to create header file called logger.h and we keep the signiture of the function
+    in that header file:
+
+        void logger(char *message);
+
+    and need to include the header file in the c file as following:
+
+        // inside logger.c file
+        #include "logger.h"
+
+    And, to use the logger function in other.c file, we need to include it is header:
+
+        // inside other.c file
+        #include "logger.h"
+
+    The last one, we need to compile files toger which are included with gcc:
+
+        gcc other.c logger.c -o all
+
+    Object files
+
+    As project gets bigger, files get more and more. And, the time to compile that project gets bigger.
+    To prevent this kind of time consuming, we can compile of all files to object files. Then we can link them
+    together to create executable file.
+
+    The benefit of compiling each file to object, if we upcate one of the source files, we just need to recompole that
+    updated file to object file again instead of all sources files then link them together to generate executable file.
+
+    This prevents us to recompile all unchanged files and saves compilation time.
+
+    Make 
+
+    We have a tool called make, it helps us to automate the compilation of only updated files and make executable
+    file.
+
+    Every file that make compiles is called "target".
+
+    Every target need be told two things:
+
+        1. the dependencies
+            which files the target is going to be generated from.
+        2. the recipe
+            the set of instructions it needs to run to generate file.
+    Together, those two form the rule. A rule tells to make all what to do.
+
+[May 25, 2024]
+    Make
+
+    The tool make can track updated files and only recompiles updated files only.
+    That saves compilation time.
+[May 27, 2024]
+    Struckts, Unions and Bitfields
+
+    Struct can hold different types of data.
+    we can create a struct as following:
+
+    struct fish {
+        const char *name;
+        const char *species;
+        int teeth;
+        int age;
+    };
+
+    The name and species properties that only hold the pointer to strings.
+    When we assign to another vriable, we just telling to computer to copy that data.
+
+    Struct can have another struct as a property, it is called nesting. Following:
+
+        struct exercise
+        {
+            const char *description;
+            float duration;
+        };
+
+        struct meal
+        {
+            const char *ingredients;
+            float weight;
+        };
+
+        struct preferences
+        {
+            struct meal food;
+            struct exercise exercise;
+        };
+
+        struct fish
+        {
+            const char *name;
+            const char *species;
+            struct preferences care;
+        };
+
+    As you can see, we need to use the "struct" keyword always when we use it, even inside of another struct.
+    To get rid of being wordy like that, we can use "typedef" keyword to create alias to a struct in c, as following:
+    (struct with alias, without name is also called anonymous struct)
+
+        typedef struct cell_phone {
+            int cell_no;
+            const char *wallpaper;
+            float minutes_of_charge;
+            } phone;
+
+        or
+        
+        typedef struct { // without struct name, only type name
+            int cell_no;
+            const char *wallpaper;
+            float minutes_of_charge;
+            } phone;
+
+
+    then we can use this "phone" type without "struct" word as following:
+
+        phone p = {5557879, "sinatra.png", 1.35};
+[June 3, 2024]
+    Unions
+    Unions can hold different type of data types. But, one data type, it can hold.
+    To creat a union, we use union keyword
+
+        typedef union {
+            short count;
+            float weight;
+            float volume;
+        } quantity;
+
+        quantity q = {.count = 5};
+        q.weight = 5.5;
+    
+    On memory, union takes memory for one type, which gets biggest place;
+    Because, it targets the biggest type size to allocate memory.
+[June 4, 2024]
+    Enum
+    Enum is similar is to struct, but it sets number(kind of index) to its each prperty, called symbols. 
+    If we use enum, union and struct together:
+
+        typedef enum
+        {
+            COUNT,
+            KILOGRAM,
+            LITRE,
+        } unit_of_measure;
+
+        typedef union
+        {
+            short count;
+            float weight;
+            float litre;
+        } measure;
+
+        typedef struct
+        {
+            const char *name;
+            measure amount;
+            unit_of_measure units;
+        } fruit;
+
+    based on enum, we can know which type of union is used
+
+    Bitfields
+    Some times we want to store only yes or no value or 1 or 0.
+
+    if we user short:
+
+    short isTrue = 0; // 00000000
+
+    As you can see, even  with short type, if we only want 0 or 1, it uses 2 bytes of
+    memory, waste of memory.
+
+    With bitfields we can use just one bit for that kind of case.
+    To use it, we need to group that kind of variables to struct, then struct stores 0 and 1
+    consequitivly in memory. Bitfields can store a custem number of bits.
+
+    To use bitfields in struct, integer should be unsigned:
+
+        typedef struct {
+            unsigned int first_visit: 1;
+            unsigned int come_again: 1;
+        } survey;
+    
+[June 5, 2024]
+    Flexible data
+    Linked list, we can implement linked list with struct in C language.
+    One thing, we need to set struct name for a struct to make pointer for it.
+    We can not use only typedef, if we use struct pointer, need to provide struct name
+    with alias name.
+
+        typedef struct island
+        {
+            char *name;
+            char *opens;
+            char *closes;
+            struct island *next;
+        } island;
+
+        island amity = {"Amity", "09:00", "17:00", NULL};
+        island craggy = {"Craggy", "09:00", "17:00", NULL};
+        island isla_nublar = {"Isla Nublar", "09:00", "17:00", NULL};
+        island shutter = {"shutter", "09:00", "17:00", NULL};
+
+        amity.next = &craggy;
+        craggy.next = &isla_nublar;
+        isla_nublar.next = &shutter;
+
+        // inserting
+        island skull = {"Skull", "09:00", "17:00", NULL};
+        isla_nublar.next = &skull;
+        skull.next = &shutter;
+[June 7, 2024]
+    Dynamic memory
+    We can ask for an amount of memory to locate data in C, with malloc() function.
+    to use it, we need to include stdlib.h header. When allocate memory with malloc() function
+    we need to free that allocated memory, with free() function.
+[June 14, 2024]
+    Valgrind, checking leaks.
+
+    valgrind is a linux program that checks leaks. It intercepts the malloc and free, and keeps track of those
+    functions. Checks all located and freed data, if any left in heap, it gives all information about it.
+    If there is no any leaks, it ensures that a program does not have any leaks.
+
+    as I am using linux subsystem on one device, WSL does not have valgrind in my case.
+    To install it:
+
+    $ apt-get install valgrind
+
+    to check leaks on a programm:
+
+    first compile the program with debug mode:
+
+    $ gcc -g -o program program.c
+
+    second check the leaks on that program:
+
+    $ valgrind -s --leaks-check=full ./program
+
+    -s shows all error and --leaks-check=full gives full detailed information.
+
+    in mack book, we use "leaks" program instead of "valgrind"
+
