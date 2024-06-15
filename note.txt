@@ -112,10 +112,6 @@
     The fprintf() function writes stream:
     
         int fprintf(FILE *stream, const char *format, ...)
-
-<<<<<<< HEAD
-    
-=======
 [May 20, 2024]
     We can get command line arguments as main function arguments.
     The main function gets arguments as array of strings, and length of that array.
@@ -141,9 +137,6 @@
                     fprintf(stderr, "Unknown option: '%s'\n", optarg);
                     return 1;
                 }
-    
-=======
-        
 [May 22, 2024]
 
     So, the C languhe has different types based on the data type, which reqiueres different memory size.
@@ -380,4 +373,3 @@
     We can ask for an amount of memory to locate data in C, with malloc() function.
     to use it, we need to include stdlib.h header. When allocate memory with malloc() function
     we need to free that allocated memory, with free() function.
->>>>>>> refs/remotes/origin/main
