@@ -373,3 +373,4 @@
     We can ask for an amount of memory to locate data in C, with malloc() function.
     to use it, we need to include stdlib.h header. When allocate memory with malloc() function
     we need to free that allocated memory, with free() function.
+
