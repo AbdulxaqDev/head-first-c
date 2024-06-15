@@ -1,7 +1,16 @@
 {
     "files.associations": {
         "*.ejs": "html",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "system_error": "c",
+        "launch.h": "c",
+        "typeinfo": "c",
+        "stddef.h": "c",
+        "__locale": "c",
+        "string": "c",
+        "string_view": "c",
+        "bitset": "c",
+        "initializer_list": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

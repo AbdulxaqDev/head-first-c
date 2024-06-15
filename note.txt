@@ -112,7 +112,272 @@
     The fprintf() function writes stream:
     
         int fprintf(FILE *stream, const char *format, ...)
-        
-[May 20, 2024]
 
+<<<<<<< HEAD
     
+=======
+[May 20, 2024]
+    We can get command line arguments as main function arguments.
+    The main function gets arguments as array of strings, and length of that array.
+
+    int main(int argc, char *argv[]){} // argc is a number of elemets and argv is array of strings that cli arguments.
+
+    So, c provides a special function that handles cli command in a confortable way.
+    It is getopt(argc, argv, "d:t"), this function returns a character.
+    So we can iterate it with file:
+
+            char ch;
+
+            while ((ch = getopt(argc, argv, "d:t")) != EOF)
+                switch (ch)
+                {
+                case 'd':
+                    delivery = optarg;
+                    break;
+                case 't':
+                    thick = 1;
+                    break;
+                defautl:
+                    fprintf(stderr, "Unknown option: '%s'\n", optarg);
+                    return 1;
+                }
+    
+=======
+        
+[May 22, 2024]
+
+    So, the C languhe has different types based on the data type, which reqiueres different memory size.
+
+    They are char, short, int, long, float and double.
+
+    The short can not handle int or long numbers, becuase of its memory allocation is small.
+
+    Almost, all types based on numbers: integer and float. Even characters are registered on computer memory as numbers.
+    computer sees 65 as "A" letter.
+
+[May 23, 2024]
+    Header files.
+
+    If we want to use one source code in seperate file, we need to create it is header file.
+
+    For example, we have following function in seperate logger.c file:
+
+        void logger(char *message)
+        {
+            printf("%s", message);
+        }
+    
+    And we need to create header file called logger.h and we keep the signiture of the function
+    in that header file:
+
+        void logger(char *message);
+
+    and need to include the header file in the c file as following:
+
+        // inside logger.c file
+        #include "logger.h"
+
+    And, to use the logger function in other.c file, we need to include it is header:
+
+        // inside other.c file
+        #include "logger.h"
+
+    The last one, we need to compile files toger which are included with gcc:
+
+        gcc other.c logger.c -o all
+
+    Object files
+
+    As project gets bigger, files get more and more. And, the time to compile that project gets bigger.
+    To prevent this kind of time consuming, we can compile of all files to object files. Then we can link them
+    together to create executable file.
+
+    The benefit of compiling each file to object, if we upcate one of the source files, we just need to recompole that
+    updated file to object file again instead of all sources files then link them together to generate executable file.
+
+    This prevents us to recompile all unchanged files and saves compilation time.
+
+    Make 
+
+    We have a tool called make, it helps us to automate the compilation of only updated files and make executable
+    file.
+
+    Every file that make compiles is called "target".
+
+    Every target need be told two things:
+
+        1. the dependencies
+            which files the target is going to be generated from.
+        2. the recipe
+            the set of instructions it needs to run to generate file.
+    Together, those two form the rule. A rule tells to make all what to do.
+
+[May 25, 2024]
+    Make
+
+    The tool make can track updated files and only recompiles updated files only.
+    That saves compilation time.
+[May 27, 2024]
+    Struckts, Unions and Bitfields
+
+    Struct can hold different types of data.
+    we can create a struct as following:
+
+    struct fish {
+        const char *name;
+        const char *species;
+        int teeth;
+        int age;
+    };
+
+    The name and species properties that only hold the pointer to strings.
+    When we assign to another vriable, we just telling to computer to copy that data.
+
+    Struct can have another struct as a property, it is called nesting. Following:
+
+        struct exercise
+        {
+            const char *description;
+            float duration;
+        };
+
+        struct meal
+        {
+            const char *ingredients;
+            float weight;
+        };
+
+        struct preferences
+        {
+            struct meal food;
+            struct exercise exercise;
+        };
+
+        struct fish
+        {
+            const char *name;
+            const char *species;
+            struct preferences care;
+        };
+
+    As you can see, we need to use the "struct" keyword always when we use it, even inside of another struct.
+    To get rid of being wordy like that, we can use "typedef" keyword to create alias to a struct in c, as following:
+    (struct with alias, without name is also called anonymous struct)
+
+        typedef struct cell_phone {
+            int cell_no;
+            const char *wallpaper;
+            float minutes_of_charge;
+            } phone;
+
+        or
+        
+        typedef struct { // without struct name, only type name
+            int cell_no;
+            const char *wallpaper;
+            float minutes_of_charge;
+            } phone;
+
+
+    then we can use this "phone" type without "struct" word as following:
+
+        phone p = {5557879, "sinatra.png", 1.35};
+[June 3, 2024]
+    Unions
+    Unions can hold different type of data types. But, one data type, it can hold.
+    To creat a union, we use union keyword
+
+        typedef union {
+            short count;
+            float weight;
+            float volume;
+        } quantity;
+
+        quantity q = {.count = 5};
+        q.weight = 5.5;
+    
+    On memory, union takes memory for one type, which gets biggest place;
+    Because, it targets the biggest type size to allocate memory.
+[June 4, 2024]
+    Enum
+    Enum is similar is to struct, but it sets number(kind of index) to its each prperty, called symbols. 
+    If we use enum, union and struct together:
+
+        typedef enum
+        {
+            COUNT,
+            KILOGRAM,
+            LITRE,
+        } unit_of_measure;
+
+        typedef union
+        {
+            short count;
+            float weight;
+            float litre;
+        } measure;
+
+        typedef struct
+        {
+            const char *name;
+            measure amount;
+            unit_of_measure units;
+        } fruit;
+
+    based on enum, we can know which type of union is used
+
+    Bitfields
+    Some times we want to store only yes or no value or 1 or 0.
+
+    if we user short:
+
+    short isTrue = 0; // 00000000
+
+    As you can see, even  with short type, if we only want 0 or 1, it uses 2 bytes of
+    memory, waste of memory.
+
+    With bitfields we can use just one bit for that kind of case.
+    To use it, we need to group that kind of variables to struct, then struct stores 0 and 1
+    consequitivly in memory. Bitfields can store a custem number of bits.
+
+    To use bitfields in struct, integer should be unsigned:
+
+        typedef struct {
+            unsigned int first_visit: 1;
+            unsigned int come_again: 1;
+        } survey;
+    
+[June 5, 2024]
+    Flexible data
+    Linked list, we can implement linked list with struct in C language.
+    One thing, we need to set struct name for a struct to make pointer for it.
+    We can not use only typedef, if we use struct pointer, need to provide struct name
+    with alias name.
+
+        typedef struct island
+        {
+            char *name;
+            char *opens;
+            char *closes;
+            struct island *next;
+        } island;
+
+        island amity = {"Amity", "09:00", "17:00", NULL};
+        island craggy = {"Craggy", "09:00", "17:00", NULL};
+        island isla_nublar = {"Isla Nublar", "09:00", "17:00", NULL};
+        island shutter = {"shutter", "09:00", "17:00", NULL};
+
+        amity.next = &craggy;
+        craggy.next = &isla_nublar;
+        isla_nublar.next = &shutter;
+
+        // inserting
+        island skull = {"Skull", "09:00", "17:00", NULL};
+        isla_nublar.next = &skull;
+        skull.next = &shutter;
+[June 7, 2024]
+    Dynamic memory
+    We can ask for an amount of memory to locate data in C, with malloc() function.
+    to use it, we need to include stdlib.h header. When allocate memory with malloc() function
+    we need to free that allocated memory, with free() function.
+>>>>>>> refs/remotes/origin/main
