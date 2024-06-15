@@ -373,3 +373,28 @@
     We can ask for an amount of memory to locate data in C, with malloc() function.
     to use it, we need to include stdlib.h header. When allocate memory with malloc() function
     we need to free that allocated memory, with free() function.
+[June 14, 2024]
+    Valgrind, checking leaks.
+
+    valgrind is a linux program that checks leaks. It intercepts the malloc and free, and keeps track of those
+    functions. Checks all located and freed data, if any left in heap, it gives all information about it.
+    If there is no any leaks, it ensures that a program does not have any leaks.
+
+    as I am using linux subsystem on one device, WSL does not have valgrind in my case.
+    To install it:
+
+    $ apt-get install valgrind
+
+    to check leaks on a programm:
+
+    first compile the program with debug mode:
+
+    $ gcc -g -o program program.c
+
+    second check the leaks on that program:
+
+    $ valgrind -s --leaks-check=full ./program
+
+    -s shows all error and --leaks-check=full gives full detailed information.
+
+    in mack book, we use "leaks" program instead of "valgrind"
