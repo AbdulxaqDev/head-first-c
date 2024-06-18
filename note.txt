@@ -444,3 +444,6 @@
     As above, we can pass a function to a function as an argument and use it.
     And, we can declare function pointer variable to store a function pointer and 
     use it as that function.
+[June 18, 2024]
+    Function pointer array
+    
