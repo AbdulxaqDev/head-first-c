@@ -5,6 +5,7 @@
 int main()
 {
     char *name = malloc(sizeof(char)*20);
+    // char *name2 = malloc(sizeof(char)*1);
     name[0] = 'B';
     name[1] = 'R';
     name[2] = 'E';
@@ -13,5 +14,7 @@ int main()
     name[5] = 'A';
     name[6] = 'N';
 
-    printf("%s\n", name);
+    free(name);
+
+    // printf("%s\n", name);
 }
