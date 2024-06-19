@@ -112,7 +112,6 @@
     The fprintf() function writes stream:
     
         int fprintf(FILE *stream, const char *format, ...)
-
 [May 20, 2024]
     We can get command line arguments as main function arguments.
     The main function gets arguments as array of strings, and length of that array.
@@ -138,9 +137,6 @@
                     fprintf(stderr, "Unknown option: '%s'\n", optarg);
                     return 1;
                 }
-    
-=======
-        
 [May 22, 2024]
 
     So, the C languhe has different types based on the data type, which reqiueres different memory size.
@@ -402,4 +398,52 @@
     -s shows all error and --leaks-check=full gives full detailed information.
 
     in mack book, we use "leaks" program instead of "valgrind"
+[June 15, 2024]
+    Function pointers
 
+    Every function name in C language is a pointer, which points to code in memory.
+    We can use function pointers to pass a function to a function as a paramater.
+    And, we can create function pointer variables to store function pointer and use that
+    variable as the function it is pointing to.
+
+    We can declare a functio variable as following:
+
+    returnType (*functionName)(funcParamType);
+        
+        #include <stdio.h>
+        #include <string.h>
+
+        char *text = "William: SBM GSOH likes sports, TV, dining";
+
+        int sports(char *s)
+        {
+            return strstr(s, "sports") != NULL;
+        }
+
+        int arts(char *s)
+        {
+            return strstr(s, "arts") != NULL;
+        }
+
+        void find(int (*match)(char *))
+        {
+            if(match(text))
+                puts(text);
+        }
+
+        int main()
+        {
+            int (*pFunc)(char *);
+            pFunc = sports; // here the match_fn works as sports.
+            
+            find(arts);
+            find(pFunc);
+            
+            return 0;
+        }
+    As above, we can pass a function to a function as an argument and use it.
+    And, we can declare function pointer variable to store a function pointer and 
+    use it as that function.
+[June 18, 2024]
+    Function pointer array
+    

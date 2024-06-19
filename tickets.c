@@ -72,10 +72,6 @@ unsigned queue_duration(size_t length, const unsigned queue[length], size_t idx)
         idx--;
     }
     free(copied_queue);
-    if (isPushed)
-        free(sliced);
-    else
-        free(pushed);
 
     return minutes;
 }
