@@ -608,5 +608,6 @@
       encrypt.o
       checksum.o
 
+    we can extract arcived object file with following command:
 
-
+      ar -x libsomelibrary.a encrypt.o
