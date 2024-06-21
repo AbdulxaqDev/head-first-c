@@ -584,7 +584,11 @@
 
       nm libsecurity.a 
 
-    output:
+      or 
+
+      ar -t libsecurity.a
+
+    output(nm):
       
       encrypt.o:
       0000000000000000 T _encrypt
@@ -597,3 +601,12 @@
       0000000000000060 s ltmp1
 
       Here is T means it is function, _encrypt and _checksum are function in libsecurity.a library.
+     
+    output(ar -t)
+
+      __.SYMDEF SORTED
+      encrypt.o
+      checksum.o
+
+
+
