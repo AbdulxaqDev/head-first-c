@@ -572,9 +572,28 @@
       we can put any other directory and we need to tell to compiler where it located with -L flag
 
         gcc some.c -L/my_libs/  -lapple -o some_code
+    
+    Headers in <> angle brackets are read from standard directories:
+      /usr/include and C:\MinGW\include
+      
+    -L flag should appear after source files:
+      gcc source.c -L // right
+      gcc -L/some_lib source.c // wrong
 
+    with nm command we can see what is inside archive libraries:
 
+      nm libsecurity.a 
 
+    output:
+      
+      encrypt.o:
+      0000000000000000 T _encrypt
+      0000000000000000 t ltmp0
+      0000000000000050 s ltmp1
 
+      checksum.o:
+      0000000000000000 T _checksum
+      0000000000000000 t ltmp0
+      0000000000000060 s ltmp1
 
-
+      Here is T means it is function, _encrypt and _checksum are function in libsecurity.a library.
