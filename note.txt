@@ -611,3 +611,23 @@
     we can extract arcived object file with following command:
 
       ar -x libsomelibrary.a encrypt.o
+[June 22, 2024]
+  Dynamic linking (happens at runtime)
+  
+  we can create object files first as "position independent code" "PIC". So we use an extra flag to tell the gcc, "-fPIC"
+    gcc -I/includes -fPIC -c some_code.c -o some_code.o 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
