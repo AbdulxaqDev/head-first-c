@@ -617,9 +617,40 @@
   we can create object files first as "position independent code" "PIC". So we use an extra flag to tell the gcc, "-fPIC"
     gcc -I/includes -fPIC -c some_code.c -o some_code.o 
  
+[July 18, 2024]
+  System calls and processes
+    We can do system calls indside of code. In C, there are functions that can call a process to execute a program.
+    To use those functions we need "stdlib.h" library. We can do system calls with system() function.
+    system() function is the same as running a command in terminal. So, it gets a string argument.
 
+    system("say 'Hello there!'") // this is read in mack
 
+    or we can get an input from user and add extra things to input and execute it. This makes the system() unsafe, wich it takes
+    string, user can pass any kind of command to execute. And, most of the time we need a structured way of executing command.
 
+    For that, we have "exec()" functions. They get structured command line arguments and have different versions.
+    Main there are two exec function types, list and vector based. And, each of these types have its own three types based on the
+    arguments they get.
+
+    Those functions are:
+      execl(), execle(), execlp()
+      execv(), execve(), execvp()
+[July 19, 2024]
+  Main difference between system() and exec() functions:
+    system() :
+      system function uses fork() in kernel level to create child process
+      then uses exec() function to execute the command. At the same time the main process
+      waits the child pricess to complete. Here, main process is the process which runs system function
+      and uses some kind of wait function for child process, child process is terminated after its execution then main process
+      continuous its execution.
+      
+    exec() :
+      exect function do not fork and do not create child process. exec functions replacess the main process, which runs the exec functions.
+      So the PID (process identififier) for main process and the process of exec function are always the same, because, as said above, the exec
+      replacess the main process and continues to use main process. The OS replaces the main process image with exec process image.
+
+    At kernel level, system() is combination of fork(), exec() and wait(),
+    the exec() directly replaces the main process without making new process with fork.
 
 
 
