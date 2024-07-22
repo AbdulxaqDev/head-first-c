@@ -652,8 +652,28 @@
     At kernel level, system() is combination of fork(), exec() and wait(),
     the exec() directly replaces the main process without making new process with fork.
 
+[July 22, 2024]
+  Difference between exec functions
+    All exec functions have the same prefix exec..() and different postfix based on the argument types they get.
+
+         l _____       
+        / \     \
+    exec   p     e
+        \ /     /
+         v ____/
 
 
+  so we can have:
+    execl() - executes a program specified by a path with a LIST of arguments.
+    execle() - executes a program specified by a path with  an ARRAY of arguments. 
+    execlp() - executes a program specified by a path with LIST of arguments. It searches the executable in the directory
+              given in the path
+    execlpe()
+
+    execv()
+    execve()
+    execvp()
+    execvpe()
 
 
 
