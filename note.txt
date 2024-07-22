@@ -445,5 +445,240 @@
     And, we can declare function pointer variable to store a function pointer and 
     use it as that function.
 [June 18, 2024]
-    Function pointer array
+  Function pointer array
+  So we can use function pinters to make code more compact
+[June 20, 2024]
+    enum tResponse{ DUMP,  SECOND_CHANCE, MARRIAGE };
+
+    typedef struct {
+      const char *name;
+      enum tResponse type;
+    }  response;
+
+    void dump(response r){
+      puts(r.name);
+      printf("you are dump, so the relationship is finished\n", r.name);
+    }
+
+    void second_chance(response r){
+      puts(r.name);
+      printf("you are lucky, so you have a second chance\n", r.name);
+    }
+
+    void marriage(response r){
+      puts(r.name);
+      printf("you are AMAZING, YOU ARE GOING TO HAVE A MARRIAGE\n", r.name);
+    }
+
+    void (*replies[])(response) = { dump, second_chance, marriage };
+    response r[] = {
+      { "Brendan", MARRIAGE },
+      { "Jpohn", DUMP },
+      { "Jonatan", SECOND_CHANCE },
+      { "Bekham", DUMP }
+    };
+
+    int main()
+    {
+      for(int i = 0; i < 4; i++){
+          puts("--------");
+          (replies[r[i].type])(r[i]);
+      }
+      puts("--------");
+
+      return 0;
+    } 
+   
+     As we can see above, we are using functions as an array of (function) pointers.
+    And, we can iterate through the function pointers at the same time through responses.
     
+    Libs
+    Most of the we want to reuse one piece of code many times. So, may want to use a code    as a standard library, we need to import that code as "libSome.h". But, first we need    to compile our code and locate it in a special place, where the C compiler can see and find that code.
+    Most of the time in unix based systems, compiles look for files in one of the 
+    following directories:
+      1. /user/local/include // most used for third-party libs header files
+      2. /user/include // mostly used for operating system header files
+
+      But, what if we want to share the code with others to use?
+      We can header files and object files/
+
+      Sharing header files:
+        1. We can store header files in /user/local/include to make it globally available
+          and we can user angle brackets to import that header files.
+        2. We can store the header files on different location and we need to use full pathname in double quotes.
+        3. Lastly, we can pass the header file path in command line with "-I" flag:
+          gcc -I/some/path/to/headerfiles test_code.c ... -o test
+        
+[June, 21]
+    Archiving
+    
+    Sharing object files:
+    We can store object files in a specific directory then we can point to them with full path name
+    while compiling a program.
+
+    gcc -I/my_header_files test_code.c /my_object_files/encrypt.o /my_obejct_files/checksum.o -o test_code
+
+    as we can see,  we point to object files with their full path name
+    
+    But, as we improve a library we tend to have more files and compiles those files with full pathname
+    becomes really difficult, to prevent this, we can archive a bunc of files together.
+    
+    So, we can archive all object files to one archive,  a library, with extension of .a 
+    after archiving, we have two option:
+    
+      1. we can store the our library to /usr/lib/  to make it gloabal and can be imported with angle brackets.
+      2. we can store them in a specific directory and point to it with -L flag following archivepathname and name of library while compiling.
+
+      if we have library with name of "libsecurity", we should refer to it as "-lsecurity"
+      all libraries have "lib" prefix.
+      
+      gcc test_code.c -L/my_libs -lsecurity -o test
+
+    In Short:
+      we have header and object files.
+      
+      Headers files
+      We can store header files in "/usr/local/include/" directory and they will be gloabe and can be use those header files by including
+      with angle brackets <some_header.h>
+
+      or 
+
+      we can store header files in a specific directory and we need to tell to compiler where our header files are located
+      with -I flag in command line, as following:
+
+        gcc some_code.c -I/some/header/directory other_code.o -o some_code
+      
+      Object files
+      We can tell to compiler where object files are located with full path names as following
+
+        gcc test_code.c /some/object_file1.o -o test_code
+
+      But, we may have many object files and can not write each of them in command line
+      So, we can archive those all object files to one file then use it globally or in a specific library.
+
+      We can create an archive of object files as following:
+
+        ar -rcs libsomelibrary.a some1.o some2.o
+      
+      we can locate it to "/usr/local/lib" and compiler can see it 
+        
+        gcc some.c -lsomelibrary -o some
+
+      as you can see, there an convention, we need to add "lib" prefix to archive name and when we use it on command line
+      we need to make that "lib" to "l", like "libapple.a", in command line "-lapple"
+
+      or 
+
+      we can put any other directory and we need to tell to compiler where it located with -L flag
+
+        gcc some.c -L/my_libs/  -lapple -o some_code
+    
+    Headers in <> angle brackets are read from standard directories:
+      /usr/include and C:\MinGW\include
+      
+    -L flag should appear after source files:
+      gcc source.c -L // right
+      gcc -L/some_lib source.c // wrong
+
+    with nm command we can see what is inside archive libraries:
+
+      nm libsecurity.a 
+
+      or 
+
+      ar -t libsecurity.a
+
+    output(nm):
+      
+      encrypt.o:
+      0000000000000000 T _encrypt
+      0000000000000000 t ltmp0
+      0000000000000050 s ltmp1
+
+      checksum.o:
+      0000000000000000 T _checksum
+      0000000000000000 t ltmp0
+      0000000000000060 s ltmp1
+
+      Here is T means it is function, _encrypt and _checksum are function in libsecurity.a library.
+     
+    output(ar -t)
+
+      __.SYMDEF SORTED
+      encrypt.o
+      checksum.o
+
+    we can extract arcived object file with following command:
+
+      ar -x libsomelibrary.a encrypt.o
+[June 22, 2024]
+  Dynamic linking (happens at runtime)
+  
+  we can create object files first as "position independent code" "PIC". So we use an extra flag to tell the gcc, "-fPIC"
+    gcc -I/includes -fPIC -c some_code.c -o some_code.o 
+ 
+[July 18, 2024]
+  System calls and processes
+    We can do system calls indside of code. In C, there are functions that can call a process to execute a program.
+    To use those functions we need "stdlib.h" library. We can do system calls with system() function.
+    system() function is the same as running a command in terminal. So, it gets a string argument.
+
+    system("say 'Hello there!'") // this is read in mack
+
+    or we can get an input from user and add extra things to input and execute it. This makes the system() unsafe, wich it takes
+    string, user can pass any kind of command to execute. And, most of the time we need a structured way of executing command.
+
+    For that, we have "exec()" functions. They get structured command line arguments and have different versions.
+    Main there are two exec function types, list and vector based. And, each of these types have its own three types based on the
+    arguments they get.
+
+    Those functions are:
+      execl(), execle(), execlp()
+      execv(), execve(), execvp()
+[July 19, 2024]
+  Main difference between system() and exec() functions:
+    system() :
+      system function uses fork() in kernel level to create child process
+      then uses exec() function to execute the command. At the same time the main process
+      waits the child pricess to complete. Here, main process is the process which runs system function
+      and uses some kind of wait function for child process, child process is terminated after its execution then main process
+      continuous its execution.
+      
+    exec() :
+      exect function do not fork and do not create child process. exec functions replacess the main process, which runs the exec functions.
+      So the PID (process identififier) for main process and the process of exec function are always the same, because, as said above, the exec
+      replacess the main process and continues to use main process. The OS replaces the main process image with exec process image.
+
+    At kernel level, system() is combination of fork(), exec() and wait(),
+    the exec() directly replaces the main process without making new process with fork.
+
+[July 22, 2024]
+  Difference between exec functions
+    All exec functions have the same prefix exec..() and different postfix based on the argument types they get.
+
+         l _____       
+        / \     \
+    exec   p     e
+        \ /     /
+         v ____/
+
+
+  so we can have:
+    execl() - executes a program specified by a path with a LIST of arguments.
+    execle() - executes a program specified by a path with  an ARRAY of arguments. 
+    execlp() - executes a program specified by a path with LIST of arguments. It searches the executable in the directory
+              given in the path
+    execlpe()
+
+    execv()
+    execve()
+    execvp()
+    execvpe()
+
+
+
+
+
+
+
+
