@@ -665,17 +665,26 @@
 
   so we can have:
     execl() - executes a program specified by a path with a LIST of arguments.
-    execle() - executes a program specified by a path with  an ARRAY of arguments. 
-    execlp() - executes a program specified by a path with LIST of arguments. It searches the executable in the directory
-              given in the path
-    execlpe()
-
-    execv()
-    execve()
-    execvp()
-    execvpe()
+    execle() - executes a program specified by a path with a LIST of arguments and an ARRAY of environment variables. 
+    execlp() - executes a program specified by a path with a LIST of arguments. 
+                It searches the executable in the directory
+                given in the path
+    execlpe() - executes a program specified by a path with LIST of arguments and ARRAY of envirenment variable. 
+                It searches the executable in the directory given in the path
 
 
+    execv() - executes a program specified by a path with an ARRAY of arguments.
+    execve() - executes a program specified by a path with  an ARRAY of arguments and an ARRAY of environment variables. 
+    execvp() - executes a program specified by a path with an ARRAY of arguments. 
+                It searches the executable in the directory
+                given in the path
+    execvpe() - executes a program specified by a path with an ARRAY of arguments and ARRAY of envirenment variable. 
+                It searches the executable in the directory given in the path
+    
+    so in all exec funtions, the arguments list's or array's the last element should be NULL, and the envirements vrairbles array's last element
+    should be NULL.
+
+    
 
 
 
