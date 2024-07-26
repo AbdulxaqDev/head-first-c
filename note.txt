@@ -681,9 +681,18 @@
     execvpe() - executes a program specified by a path with an ARRAY of arguments and ARRAY of envirenment variable. 
                 It searches the executable in the directory given in the path
     
+    so in all exec funtions, the arguments list   
     so in all exec funtions, the arguments list's or array's the last element should be NULL, and the envirements vrairbles array's last element
     should be NULL.
 
+    's or array's the last element should be NULL, and the envirements vrairbles array's last element
+    should be NULL.
+
+[July 26, 2024]
+  One missing thing with exec functions, the main process exists when it executes the exec function and
+  the main process stops when it reaches to exec function, then exec function continues to run.
+
+  The thing is that exec function do not return to the file main fucntion.
     
 
 
