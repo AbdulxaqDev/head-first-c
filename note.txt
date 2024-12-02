@@ -1,1 +1,4 @@
-[prep]
+[Dec 2, 2024]
+We read the introduction of the book. The Metacognition term used in the book is really mind catching.
+Thinking about thinking. In short, the book intro explained the implementation of lots methods to make 
+us undertand in efficient way.
