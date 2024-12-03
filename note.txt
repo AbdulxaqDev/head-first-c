@@ -2,3 +2,7 @@
 We read the introduction of the book. The Metacognition term used in the book is really mind catching.
 Thinking about thinking. In short, the book intro explained the implementation of lots methods to make 
 us undertand in efficient way.
+
+[Dec 3, 2024]
+The C language is very small language and it needs some external libraries to work.
+For example, <stdio.h> enables to get and write data from and to terminal.
