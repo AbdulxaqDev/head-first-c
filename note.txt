@@ -9,3 +9,7 @@ For example, <stdio.h> enables to get and write data from and to terminal.
 
 [Dec 4, 2024]
 The atoi() function converts text into a number, which come from <stdlib.h> header.
+
+[Dec 5, 2024]
+Advice: To best understand pointers, go slowly!
+A pointer is just a memory address thet points to an address of a data in memory.
