@@ -12,4 +12,11 @@ The atoi() function converts text into a number, which come from <stdlib.h> head
 
 [Dec 5, 2024]
 Advice: To best understand pointers, go slowly!
-A pointer is just a memory address thet points to an address of a data in memory.
+A pointer is just a memory address that points to an address of a data in memory.
+
+[Dec 10, 2024]
+By default, arguments are passed to functions by value. Which means functions get a new of argument.
+If we want to update the argument in memory, we need to pass the pointer (argument's address) to functions.
+To get the address of a variable, we use "&" sign as prefix on variable names.
+
+To address the value of a pointer,  we use dereference sign "*" as prefix on variable name.
