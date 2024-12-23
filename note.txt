@@ -1,7 +1,5 @@
 [Dec 2, 2024]
-We read the introduction of the book. The Metacognition term used in the book is really mind catching.
-Thinking about thinking. In short, the book intro explained the implementation of lots methods to make 
-us undertand in efficient way.
+We read the introduction of the book. The Metacognition term used in the book is really mind catching. Thinking about thinking. In short, the book intro explained the implementation of lots methods to make us undertand in efficient way.
 
 [Dec 3, 2024]
 The C language is very small language and it needs some external libraries to work.
@@ -15,9 +13,9 @@ Advice: To best understand pointers, go slowly!
 A pointer is just a memory address that points to an address of a data in memory.
 
 [Dec 10, 2024]
-By default, arguments are passed to functions by value. Which means functions get a new of argument.
-If we want to update the argument in memory, we need to pass the pointer (argument's address) to functions.
-To get the address of a variable, we use "&" sign as prefix on variable names.
+By default, arguments are passed to functions by value. Which means functions get a new copy of argument. If we want to update the argument in memory, we need to pass the pointer (argument's address) to functions. To get the address of a variable, we use "&" sign as prefix on variable names.
 
-To address the value of a pointer,  we use dereference sign "*" as prefix on variable name.
-An array variable can be use as a pointer and points to the first element of array.
+To address the value of a pointer,  we use dereference sign "*" as prefix on variable name. An array variable can be use as a pointer and points to the first element of array.
+
+[Dec 23, 2024]
+With sizeof() we can check sime of a type. If it is used for the vriable name of an array, it returns only the size of pointer, 4 or 8. Not whole array of chars.

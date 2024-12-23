@@ -1,9 +1,10 @@
 #include <stdio.h>
 
 int main() {
-    int x = 4;
-    
-    printf("The address of x: %p\n", &x);
-    
+    chars s[] = "How big is it?";
+    char *t = s;
+
+    printf("");
+
     return 0;
 }
